@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uas/screens/movie_details_page.dart';
 
+import 'screens/login_page.dart';
+import 'screens/homepage.dart';
 import 'screens/onboarding.dart';
 import 'theme/app_colors.dart';
 import 'theme/app_typography.dart';
@@ -30,12 +32,13 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: AppTypography.textTheme,
       ),
-      initialRoute: "/detail-page",
+      initialRoute: "/onboard",
 
       routes: {
         "/onboard": (context) => OnboardingPage(),
         "/detail-page": (context) => MovieDetailsPage(),
-
+        "/homepage": (context) => BerandaPage(),
+        "/login": (context) => LoginPage(),
       },
     );
   }
