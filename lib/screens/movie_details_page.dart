@@ -92,12 +92,12 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                         runSpacing: 8.0,
                         children: [
                           // REVISI: Ganti string statis di bawah menggunakan data dari activeMovie jika perlu
-                          _buildTag(activeMovie.genres[0]),
+                          buildTag(activeMovie.genres[0]),
                           _buildTagWithIcon(
                             Icons.star,
                             activeMovie.rating.toString(),
                           ),
-                          _buildTag(
+                          buildTag(
                             "${activeMovie.durationMinutes.toString()} Min",
                           ),
                         ],
@@ -217,7 +217,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
   }
 
   //component tag biar gak capek
-  Widget _buildTag(String text) {
+  Widget buildTag(String text) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -323,7 +323,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                     ),
                   ],
                 ),
-                _buildTag(tag),
+                buildTag(tag),
               ],
             ),
             const SizedBox(height: 12),

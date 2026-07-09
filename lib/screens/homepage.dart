@@ -483,89 +483,94 @@ class _CinemaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.neutral.surface.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.glass.border),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: AppColors.neutral.elevated,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.glass.highlight),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "/cinema-page", arguments: cinema);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.neutral.surface.withValues(alpha: 0.6),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.glass.border),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                color: AppColors.neutral.elevated,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.glass.highlight),
+              ),
+              child: Icon(
+                Icons.theaters,
+                size: 32,
+                color: AppColors.brand.primary,
+              ),
             ),
-            child: Icon(
-              Icons.theaters,
-              size: 32,
-              color: AppColors.brand.primary,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  cinema.name,
-                  style: AppTypography.bodyLg.copyWith(
-                    color: Colors.white,
-                    fontFamily: AppTypography.titleMd.fontFamily,
-                    fontWeight: FontWeight.w600,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    cinema.name,
+                    style: AppTypography.bodyLg.copyWith(
+                      color: Colors.white,
+                      fontFamily: AppTypography.titleMd.fontFamily,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  cinema.distanceKm.toString(),
-                  style: AppTypography.labelSm.copyWith(
-                    color: AppColors.neutral.onMuted,
+                  const SizedBox(height: 4),
+                  Text(
+                    cinema.distanceKm.toString(),
+                    style: AppTypography.labelSm.copyWith(
+                      color: AppColors.neutral.onMuted,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  children: cinema.tags.map((tag) {
-                    final isImax = tag == 'IMAX';
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isImax
-                            ? AppColors.brand.secondary.withValues(alpha: 0.2)
-                            : AppColors.neutral.elevated,
-                        borderRadius: BorderRadius.circular(4),
-                        border: isImax
-                            ? Border.all(
-                                color: AppColors.brand.secondary.withValues(
-                                  alpha: 0.3,
-                                ),
-                              )
-                            : null,
-                      ),
-                      child: Text(
-                        tag,
-                        style: AppTypography.labelSm.copyWith(
-                          color: isImax
-                              ? AppColors.brand.secondary
-                              : AppColors.neutral.onMuted,
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8,
+                    children: cinema.tags.map((tag) {
+                      final isImax = tag == 'IMAX';
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
                         ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ],
+                        decoration: BoxDecoration(
+                          color: isImax
+                              ? AppColors.brand.secondary.withValues(alpha: 0.2)
+                              : AppColors.neutral.elevated,
+                          borderRadius: BorderRadius.circular(4),
+                          border: isImax
+                              ? Border.all(
+                                  color: AppColors.brand.secondary.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                )
+                              : null,
+                        ),
+                        child: Text(
+                          tag,
+                          style: AppTypography.labelSm.copyWith(
+                            color: isImax
+                                ? AppColors.brand.secondary
+                                : AppColors.neutral.onMuted,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Icon(Icons.chevron_right, color: AppColors.neutral.onMuted),
-        ],
+            Icon(Icons.chevron_right, color: AppColors.neutral.onMuted),
+          ],
+        ),
       ),
     );
   }

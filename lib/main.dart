@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uas/data/dummy_data.dart';
+import 'package:flutter_uas/screens/cinema_detail_page.dart';
 import 'package:flutter_uas/screens/movie_details_page.dart';
 
 import 'screens/login_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/onboard": (context) => OnboardingPage(),
         "/detail-page": (context) => MovieDetailsPage(),
+        "/cinema-page": (context) => CinemaDetailPage(),
         "/homepage": (context) => BerandaPage(),
         "/login": (context) => LoginPage(),
       },
