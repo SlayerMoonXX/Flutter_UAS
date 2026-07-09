@@ -591,10 +591,10 @@ class _BottomNavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavBarItem(icon: Icons.home, label: 'Beranda', active: true),
-                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies'),
-                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas'),
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil'),
+                _NavBarItem(icon: Icons.home, label: 'Beranda', active: true, route: '/homepage'),
+                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies', route: '/movies'),
+                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', route: '/cinemas'),
+                _NavBarItem(icon: Icons.person_outline, label: 'Profil', route: ''),
               ],
             ),
           ),
@@ -608,21 +608,27 @@ class _NavBarItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool active;
+  final String route;
 
   const _NavBarItem({
     required this.icon,
     required this.label,
     this.active = false,
+    required this.route,
   });
 
   @override
   Widget build(BuildContext context) {
     final color = active
-        ? AppColors.brand.primary
+        ? AppColors.brand.primarySoft
         : AppColors.neutral.onMuted.withValues(alpha: 0.6);
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (!active && route.isNotEmpty) {
+          Navigator.pushReplacementNamed(context, route);
+        }
+      },
       borderRadius: BorderRadius.circular(8),
       child: Padding(
         padding: const EdgeInsets.all(8),

@@ -229,6 +229,62 @@ final movieKim = Movie(
   ],
 );
 
+final movieDune = Movie(
+  id: 'm5',
+  title: 'Dune: Part Two',
+  imageUrl: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2JGjjc9CW.jpg',
+  genres: ['Sci-Fi', 'Adventure'],
+  rating: 4.8,
+  durationMinutes: 166,
+  director: 'Denis Villeneuve',
+  description: 'Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.',
+  availableCinemas: [
+    CinemaShowtime(cinema: cinemaGrandCity, classType: 'IMAX', schedules: ['14:00', '18:00']),
+  ],
+);
+
+final movieOppenheimer = Movie(
+  id: 'm6',
+  title: 'Oppenheimer',
+  imageUrl: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
+  genres: ['Drama', 'History'],
+  rating: 4.9,
+  durationMinutes: 180,
+  director: 'Christopher Nolan',
+  description: 'The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.',
+  availableCinemas: [
+    CinemaShowtime(cinema: cinemaGI, classType: 'IMAX', schedules: ['10:00', '15:00', '20:00']),
+  ],
+);
+
+final movieSpiderVerse = Movie(
+  id: 'm7',
+  title: 'Spider-Man: Across the Spider-Verse',
+  imageUrl: 'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
+  genres: ['Animation', 'Action'],
+  rating: 4.7,
+  durationMinutes: 140,
+  director: 'Joaquim Dos Santos',
+  description: 'Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence.',
+  availableCinemas: [
+    CinemaShowtime(cinema: cinemaPS, classType: 'REGULAR', schedules: ['12:30', '16:00', '19:30']),
+  ],
+);
+
+final movieJohnWick = Movie(
+  id: 'm8',
+  title: 'John Wick: Chapter 4',
+  imageUrl: 'https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg',
+  genres: ['Action', 'Thriller'],
+  rating: 4.5,
+  durationMinutes: 169,
+  director: 'Chad Stahelski',
+  description: 'John Wick uncovers a path to defeating The High Table.',
+  availableCinemas: [
+    CinemaShowtime(cinema: cinemaTownSquare, classType: 'PREMIERE', schedules: ['13:00', '17:30', '21:00']),
+  ],
+);
+
 // ==========================================
 // 3. INJECT FILM KEMBALI KE LIST BIOSKOP
 // ==========================================
