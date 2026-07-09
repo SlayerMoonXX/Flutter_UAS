@@ -62,7 +62,7 @@ final movieChainsawMan = Movie(
   durationMinutes: 100, // 100 Menit sesuai data asli
   director: 'Tatsuya Yoshihara', // Sutradara asli filmnya
   description:
-      'Denji faces his deadliest battle yet, fueled by love in a world where survival knows no rules. After meeting Reze, a mysterious girl who works at a café, Denji’s everyday life begins to change dramatically as explosive secrets unfold.',
+      "Denji faces his deadliest battle yet, fueled by love in a world where survival knows no rules. After meeting Reze, a mysterious girl who works at a café, Denji’s everyday life begins to change dramatically as explosive secrets unfold.",
   availableCinemas: [
     CinemaShowtime(
       cinema: cinemaGI,
@@ -151,8 +151,7 @@ final cinemaTownSquare = Cinema(
 final movieAvatar = Movie(
   id: 'm1',
   title: 'Avatar: The Last Airbender',
-  imageUrl:
-      'assets/images/posters/avatar_the_last_airbender.jpg', // Ikut path temenmu
+  imageUrl: 'assets/png/avatar.png', // Ikut path temenmu
   genres: ['Fantasy'],
   rating: 4.6,
   durationMinutes: 135,
@@ -176,7 +175,7 @@ final movieAvatar = Movie(
 final movieFurious = Movie(
   id: 'm2',
   title: 'The Furious',
-  imageUrl: 'assets/images/posters/the_furious.jpg',
+  imageUrl: 'assets/png/furious.png',
   genres: ['Action'],
   rating: 4.3,
   durationMinutes: 100,
@@ -195,7 +194,7 @@ final movieFurious = Movie(
 final movieLesson = Movie(
   id: 'm3',
   title: 'Teach You a Lesson',
-  imageUrl: 'assets/images/posters/teach_you_a_lesson.jpg',
+  imageUrl: 'assets/png/lesson.png',
   genres: ['Thriller'],
   rating: 4.1,
   durationMinutes: 110,
@@ -214,7 +213,7 @@ final movieLesson = Movie(
 final movieKim = Movie(
   id: 'm4',
   title: 'Agent Kim: Reactivated',
-  imageUrl: 'assets/images/posters/agent_kim_reactivated.jpg',
+  imageUrl: 'assets/png/mrkim.png',
   genres: ['Action'],
   rating: 4.4,
   durationMinutes: 115,
