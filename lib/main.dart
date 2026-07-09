@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: AppTypography.textTheme,
       ),
-      initialRoute: "/onboard",
+      initialRoute: "/homepage",
 
       routes: {
         "/onboard": (context) => OnboardingPage(),
