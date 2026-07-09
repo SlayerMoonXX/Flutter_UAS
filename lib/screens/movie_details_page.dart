@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uas/models/movie_model.dart';
 import 'package:flutter_uas/theme/app_colors.dart';
 import 'package:flutter_uas/theme/app_typography.dart';
-import '../data/dummy_data.dart';
 
 class MovieDetailsPage extends StatefulWidget {
-  // REVISI: Hapus tanda ? dan tambah required jika argument sudah di-passing
   final Movie? movie;
   const MovieDetailsPage({super.key, this.movie});
 
@@ -16,19 +14,14 @@ class MovieDetailsPage extends StatefulWidget {
 
 class _MovieDetailsState extends State<MovieDetailsPage> {
   // Menggunakan fallback data dummy sementara
-  late Movie activeMovie;
   String? selectedCinema;
   String? selectedTime;
 
   @override
-  void initState() {
-    super.initState();
-    // REVISI: Ubah jadi -> activeMovie = widget.movie!;
-    activeMovie = widget.movie ?? movieChainsawMan;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final activeMovie = ModalRoute.of(context)!.settings.arguments as Movie;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -100,7 +93,6 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                         children: [
                           // REVISI: Ganti string statis di bawah menggunakan data dari activeMovie jika perlu
                           _buildTag(activeMovie.genres[0]),
-                          _buildTag(activeMovie.genres[1]),
                           _buildTagWithIcon(
                             Icons.star,
                             activeMovie.rating.toString(),
