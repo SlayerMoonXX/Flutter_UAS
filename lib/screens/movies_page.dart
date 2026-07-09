@@ -70,9 +70,18 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: AppColors.brand.primarySoft,
                   errorBuilder: (context, error, stackTrace) => Row(
                     children: [
-                      Icon(Icons.movie_creation_outlined, color: AppColors.brand.primarySoft, size: 24),
+                      Icon(
+                        Icons.movie_creation_outlined,
+                        color: AppColors.brand.primarySoft,
+                        size: 24,
+                      ),
                       const SizedBox(width: 8),
-                      Text('CinePremium', style: AppTypography.titleMd.copyWith(color: AppColors.brand.primarySoft)),
+                      Text(
+                        'CinePremium',
+                        style: AppTypography.titleMd.copyWith(
+                          color: AppColors.brand.primarySoft,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -108,8 +117,14 @@ class _SearchBar extends StatelessWidget {
         style: AppTypography.bodyMd.copyWith(color: AppColors.neutral.onBase),
         decoration: InputDecoration(
           hintText: 'Cari film, aktor, atau sutradara...',
-          hintStyle: AppTypography.bodyMd.copyWith(color: AppColors.neutral.onMuted),
-          prefixIcon: Icon(Icons.search, color: AppColors.neutral.onMuted, size: 20),
+          hintStyle: AppTypography.bodyMd.copyWith(
+            color: AppColors.neutral.onMuted,
+          ),
+          prefixIcon: Icon(
+            Icons.search,
+            color: AppColors.neutral.onMuted,
+            size: 20,
+          ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 14),
         ),
@@ -155,7 +170,9 @@ class _FilterChip extends StatelessWidget {
       child: Text(
         label,
         style: AppTypography.bodyMd.copyWith(
-          color: isActive ? AppColors.brand.onPrimary : AppColors.neutral.onMuted,
+          color: isActive
+              ? AppColors.brand.onPrimary
+              : AppColors.neutral.onMuted,
         ),
       ),
     );
@@ -186,8 +203,17 @@ class _ComingSoonSection extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Lihat Semua', style: AppTypography.labelLg.copyWith(color: AppColors.brand.primary)),
-                Icon(Icons.chevron_right, color: AppColors.brand.primary, size: 16),
+                Text(
+                  'Lihat Semua',
+                  style: AppTypography.labelLg.copyWith(
+                    color: AppColors.brand.primary,
+                  ),
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  color: AppColors.brand.primary,
+                  size: 16,
+                ),
               ],
             ),
           ],
@@ -201,7 +227,8 @@ class _ComingSoonSection extends StatelessWidget {
                 title: 'Chronicles of Kepler',
                 releaseDate: 'Rilis 24 Desember',
                 genre: 'Sci-Fi Thriller',
-                imageUrl: 'https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                imageUrl:
+                    'https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                 isExclusive: true,
                 isImax: true,
               ),
@@ -272,24 +299,59 @@ class _ComingSoonCard extends StatelessWidget {
               children: [
                 if (isExclusive) ...[
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: AppColors.brand.primary, borderRadius: BorderRadius.circular(4)),
-                    child: Text('EXCLUSIVE', style: AppTypography.labelSm.copyWith(color: Colors.white, fontSize: 8)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.brand.primary,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      'EXCLUSIVE',
+                      style: AppTypography.labelSm.copyWith(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 6),
                 ],
                 if (isImax)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
-                    child: Text('IMAX', style: AppTypography.labelSm.copyWith(color: Colors.white, fontSize: 8)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      'IMAX',
+                      style: AppTypography.labelSm.copyWith(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                    ),
                   ),
               ],
             ),
             const SizedBox(height: 8),
-            Text(title, style: AppTypography.titleMd.copyWith(color: Colors.white, fontSize: 18)),
+            Text(
+              title,
+              style: AppTypography.titleMd.copyWith(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
             const SizedBox(height: 4),
-            Text('$releaseDate • $genre', style: AppTypography.labelSm.copyWith(color: AppColors.neutral.onMuted)),
+            Text(
+              '$releaseDate • $genre',
+              style: AppTypography.labelSm.copyWith(
+                color: AppColors.neutral.onMuted,
+              ),
+            ),
           ],
         ),
       ),
@@ -349,20 +411,26 @@ class _MovieGridCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
+                  Image.asset(
                     movie.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Container(
                       color: AppColors.neutral.elevated,
                       alignment: Alignment.center,
-                      child: Icon(Icons.image_not_supported_outlined, color: AppColors.neutral.onMuted),
+                      child: Icon(
+                        Icons.image_not_supported_outlined,
+                        color: AppColors.neutral.onMuted,
+                      ),
                     ),
                   ),
                   Positioned(
                     top: 8,
                     right: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(4),
@@ -371,9 +439,18 @@ class _MovieGridCard extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.star, size: 14, color: AppColors.brand.tertiary),
+                          Icon(
+                            Icons.star,
+                            size: 14,
+                            color: AppColors.brand.tertiary,
+                          ),
                           const SizedBox(width: 4),
-                          Text(movie.rating.toString(), style: AppTypography.labelSm.copyWith(color: Colors.white)),
+                          Text(
+                            movie.rating.toString(),
+                            style: AppTypography.labelSm.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -395,7 +472,9 @@ class _MovieGridCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             '${movie.genres.join(', ')} • ${movie.durationMinutes ~/ 60}h ${movie.durationMinutes % 60}m',
-            style: AppTypography.labelSm.copyWith(color: AppColors.neutral.onMuted),
+            style: AppTypography.labelSm.copyWith(
+              color: AppColors.neutral.onMuted,
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -426,10 +505,30 @@ class _BottomNavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavBarItem(icon: Icons.home, label: 'Beranda', active: activeTab == 'Beranda', route: '/homepage'),
-                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies', active: activeTab == 'Movies', route: '/movies'),
-                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', active: activeTab == 'Cinemas', route: '/cinemas'),
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil', active: activeTab == 'Profil', route: ''),
+                _NavBarItem(
+                  icon: Icons.home,
+                  label: 'Beranda',
+                  active: activeTab == 'Beranda',
+                  route: '/homepage',
+                ),
+                _NavBarItem(
+                  icon: Icons.movie_filter_outlined,
+                  label: 'Movies',
+                  active: activeTab == 'Movies',
+                  route: '/movies',
+                ),
+                _NavBarItem(
+                  icon: Icons.theaters_outlined,
+                  label: 'Cinemas',
+                  active: activeTab == 'Cinemas',
+                  route: '/cinemas',
+                ),
+                _NavBarItem(
+                  icon: Icons.person_outline,
+                  label: 'Profil',
+                  active: activeTab == 'Profil',
+                  route: '',
+                ),
               ],
             ),
           ),
