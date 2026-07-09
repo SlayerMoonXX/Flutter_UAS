@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uas/models/movie_model.dart';
 import 'package:flutter_uas/theme/app_colors.dart';
 import 'package:flutter_uas/theme/app_typography.dart';
+import 'package:flutter_uas/screens/booking_page.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   final Movie? movie;
@@ -175,7 +176,26 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
         child: InkWell(
           onTap: selectedCinema != null && selectedTime != null
               ? () {
-                  print("Memesan tiket di $selectedCinema jam $selectedTime");
+                  // 1. Cari data bioskop yang sedang dipilih untuk mengambil daftar jadwalnya (availableTimes)
+        final selectedCinemaData = activeMovie.availableCinemas.firstWhere(
+          (showtime) => showtime.cinema.name == selectedCinema,
+        );
+
+        // 2. Lakukan navigasi dan kirim argumen menggunakan RouteSettings
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SeatBookingPage(),
+            settings: RouteSettings(
+              arguments: SeatBookingArgs(
+                movie: activeMovie,
+                cinemaName: selectedCinema!,
+                initialTime: selectedTime!,
+                availableTimes: selectedCinemaData.schedules,
+              ),
+            ),
+          ),
+        );
                 }
               : null,
           borderRadius: BorderRadius.circular(12),

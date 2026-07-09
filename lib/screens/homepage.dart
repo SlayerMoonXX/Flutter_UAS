@@ -62,7 +62,7 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
-          color: AppColors.neutral.surface.withValues(alpha: 0.8),
+          color: AppColors.neutral.base,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SafeArea(
             bottom: false,
@@ -79,30 +79,6 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                     size: 28,
                   ),
                 ),
-                const SizedBox(width: 8),
-                const Spacer(),
-                // Nav desktop disembunyikan di layar sempit (mobile-first)
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (MediaQuery.of(context).size.width < 768) {
-                      return IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.search,
-                          color: AppColors.neutral.onMuted,
-                        ),
-                      );
-                    }
-                    return Row(
-                      children: [
-                        _NavLink(label: 'Beranda', active: true),
-                        _NavLink(label: 'Movies'),
-                        _NavLink(label: 'Cinemas'),
-                        _NavLink(label: 'Profil'),
-                      ],
-                    );
-                  },
-                ),
               ],
             ),
           ),
@@ -114,28 +90,6 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(64);
 }
-
-class _NavLink extends StatelessWidget {
-  final String label;
-  final bool active;
-
-  const _NavLink({required this.label, this.active = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(
-        label,
-        style: AppTypography.bodyLg.copyWith(
-          color: active ? AppColors.brand.primary : AppColors.neutral.onMuted,
-          fontWeight: active ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-    );
-  }
-}
-
 /// =====================================================
 /// Hero Section (poster utama)
 /// =====================================================
@@ -591,10 +545,10 @@ class _BottomNavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavBarItem(icon: Icons.home, label: 'Beranda', active: true),
-                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies'),
-                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas'),
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil'),
+                _NavBarItem(icon: Icons.home, label: 'Beranda', active: true, route: '/homepage'),
+                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies', route: '/movies'),
+                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', route: '/cinemas'),
+                _NavBarItem(icon: Icons.person_outline, label: 'Profil', route: '/ticket-history'),
               ],
             ),
           ),
@@ -608,21 +562,27 @@ class _NavBarItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool active;
+  final String route;
 
   const _NavBarItem({
     required this.icon,
     required this.label,
     this.active = false,
+    required this.route,
   });
 
   @override
   Widget build(BuildContext context) {
     final color = active
-        ? AppColors.brand.primary
+        ? AppColors.brand.primarySoft
         : AppColors.neutral.onMuted.withValues(alpha: 0.6);
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (!active && route.isNotEmpty) {
+          Navigator.pushReplacementNamed(context, route);
+        }
+      },
       borderRadius: BorderRadius.circular(8),
       child: Padding(
         padding: const EdgeInsets.all(8),

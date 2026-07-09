@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uas/screens/movie_details_page.dart';
 
+import 'screens/ticket_history_page.dart';
 import 'data/dummy_data.dart';
+import 'screens/cinemas_page.dart';
 import 'screens/cinema_detail_page.dart';
 import 'screens/registration.dart';
 import 'screens/login_page.dart';
 import 'screens/homepage.dart';
 import 'screens/onboarding.dart';
+import 'screens/movies_page.dart';
 import 'theme/app_colors.dart';
 import 'theme/app_typography.dart';
 
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: AppTypography.textTheme,
       ),
-      initialRoute: "/homepage",
+      initialRoute: "/onboard",
 
       routes: {
         "/onboard": (context) => OnboardingPage(),
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         "/login": (context) => LoginPage(),
         "/register": (context) => RegistrationPage(),
         "/cinema-page": (context) => CinemaDetailPage(),
+        "/movies": (context) => MoviesPage(),
+        "/cinemas": (context) => CinemasPage(),
+        '/ticket-history': (context) => const TicketHistoryPage(),
       },
     );
   }
