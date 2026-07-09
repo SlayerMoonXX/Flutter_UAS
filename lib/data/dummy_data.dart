@@ -151,57 +151,82 @@ final cinemaTownSquare = Cinema(
 final movieAvatar = Movie(
   id: 'm1',
   title: 'Avatar: The Last Airbender',
-  imageUrl: 'assets/png/avatar.png', // Ikut path temenmu
+  imageUrl:
+      'assets/images/posters/avatar_the_last_airbender.jpg', // Ikut path temenmu
   genres: ['Fantasy'],
   rating: 4.6,
   durationMinutes: 135,
-  director: 'Albert Kim', 
-  description: 'A young boy known as the Avatar must master the four elemental powers to save a world at war.',
+  director: 'Albert Kim',
+  description:
+      'A young boy known as the Avatar must master the four elemental powers to save a world at war.',
   availableCinemas: [
-    CinemaShowtime(cinema: cinemaGrandCity, classType: 'IMAX', schedules: ['12:30', '15:15', '18:00', '20:45']),
-    CinemaShowtime(cinema: cinemaTownSquare, classType: 'REGULAR', schedules: ['13:00', '16:30', '19:15']),
+    CinemaShowtime(
+      cinema: cinemaGrandCity,
+      classType: 'IMAX',
+      schedules: ['12:30', '15:15', '18:00', '20:45'],
+    ),
+    CinemaShowtime(
+      cinema: cinemaTownSquare,
+      classType: 'REGULAR',
+      schedules: ['13:00', '16:30', '19:15'],
+    ),
   ],
 );
 
 final movieFurious = Movie(
   id: 'm2',
   title: 'The Furious',
-  imageUrl: 'assets/png/furious.png',
+  imageUrl: 'assets/images/posters/the_furious.jpg',
   genres: ['Action'],
   rating: 4.3,
   durationMinutes: 100,
   director: 'Unknown Director',
-  description: 'An adrenaline-fueled ride through the underground racing circuit.',
+  description:
+      'An adrenaline-fueled ride through the underground racing circuit.',
   availableCinemas: [
-    CinemaShowtime(cinema: cinemaGrandCity, classType: 'PREMIERE', schedules: ['14:00', '18:00']),
+    CinemaShowtime(
+      cinema: cinemaGrandCity,
+      classType: 'PREMIERE',
+      schedules: ['14:00', '18:00'],
+    ),
   ],
 );
 
 final movieLesson = Movie(
   id: 'm3',
   title: 'Teach You a Lesson',
-  imageUrl: 'assets/png/lesson.png',
+  imageUrl: 'assets/images/posters/teach_you_a_lesson.jpg',
   genres: ['Thriller'],
   rating: 4.1,
   durationMinutes: 110,
   director: 'Unknown Director',
-  description: 'A suspenseful game of cat and mouse where secrets can be deadly.',
+  description:
+      'A suspenseful game of cat and mouse where secrets can be deadly.',
   availableCinemas: [
-    CinemaShowtime(cinema: cinemaTownSquare, classType: 'REGULAR', schedules: ['11:00', '15:30', '20:00']),
+    CinemaShowtime(
+      cinema: cinemaTownSquare,
+      classType: 'REGULAR',
+      schedules: ['11:00', '15:30', '20:00'],
+    ),
   ],
 );
 
 final movieKim = Movie(
   id: 'm4',
   title: 'Agent Kim: Reactivated',
-  imageUrl: 'assets/png/mrkim.png',
+  imageUrl: 'assets/images/posters/agent_kim_reactivated.jpg',
   genres: ['Action'],
   rating: 4.4,
   durationMinutes: 115,
   director: 'Unknown Director',
-  description: 'The top secret agent is pulled out of retirement for one final, dangerous assignment.',
+  description:
+      'The top secret agent is pulled out of retirement for one final, dangerous assignment.',
   availableCinemas: [
-    CinemaShowtime(cinema: cinemaGrandCity, classType: 'IMAX', schedules: ['13:10', '16:20', '19:30']),
+    CinemaShowtime(
+      cinema: cinemaGrandCity,
+      classType: 'IMAX',
+      schedules: ['13:10', '16:20', '19:30'],
+    ),
   ],
 );
 
@@ -209,14 +234,12 @@ final movieKim = Movie(
 // 3. INJECT FILM KEMBALI KE LIST BIOSKOP
 // ==========================================
 void initDummyData() {
-  // Cek biar gak duplikat data kalau fungsi dipanggil tidak sengaja beberapa kali
-  if (cinemaGI.currentMovies.isEmpty) {
-    cinemaGI.currentMovies.addAll([movieChainsawMan, movieStarlight]);
-    cinemaPS.currentMovies.addAll([
-      movieChainsawMan,
-      movieStarlight,
-      movieNeonShadows,
-    ]);
-    cinemaPIM.currentMovies.addAll([movieChainsawMan]);
+  // FIX: Cek menggunakan variabel bioskop yang dipakai di Homepage sekarang
+  if (cinemaGrandCity.currentMovies.isEmpty) {
+    // Isi film ke bioskop Grand City (punya temanmu)
+    cinemaGrandCity.currentMovies.addAll([movieAvatar, movieFurious, movieKim]);
+
+    // Isi film ke bioskop Town Square (punya temanmu)
+    cinemaTownSquare.currentMovies.addAll([movieAvatar, movieLesson]);
   }
 }
