@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uas/models/cinema_model.dart';
+import 'package:flutter_uas/models/movie_model.dart';
 import 'package:flutter_uas/theme/app_colors.dart';
 import 'package:flutter_uas/theme/app_typography.dart';
 
@@ -118,6 +119,7 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
                       : 'REGULAR';
 
                   return buildMovieCard(
+                    movie: movie,
                     imageUrl: movie.imageUrl, // Ambil dari model baru
                     tagText: classType,
                     tagColor: classType == 'PREMIERE'
@@ -162,6 +164,7 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
   }
 
   Widget buildMovieCard({
+    required Movie movie,
     required String imageUrl,
     required String tagText,
     required Color tagColor,
@@ -169,78 +172,83 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
     required String genre,
     required int duration,
   }) {
-    return SizedBox(
-      width: 180,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Stack(
-          children: [
-            Image.asset(
-              imageUrl,
-              height: 270,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withValues(alpha: 0.8),
-                    ],
-                    stops: const [0.6, 1.0],
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "/detail-page", arguments: movie);
+      },
+      child: SizedBox(
+        width: 180,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Stack(
+            children: [
+              Image.asset(
+                imageUrl,
+                height: 270,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withValues(alpha: 0.8),
+                      ],
+                      stops: const [0.6, 1.0],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 12,
-              left: 12,
-              right: 12,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: tagColor,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      tagText,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
+              Positioned(
+                bottom: 12,
+                left: 12,
+                right: 12,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: tagColor,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        tagText,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(height: 8),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    "$genre • $duration Menit",
-                    style: const TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Text(
+                      "$genre • $duration Menit",
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
