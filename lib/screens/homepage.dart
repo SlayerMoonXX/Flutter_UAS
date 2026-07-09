@@ -576,7 +576,7 @@ class _BottomNavBar extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
         child: Container(
-          height: 80,
+          padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.neutral.elevated.withValues(alpha: 0.9),
             border: Border(top: BorderSide(color: AppColors.glass.highlight)),
