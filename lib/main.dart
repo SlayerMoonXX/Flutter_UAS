@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uas/screens/movie_details_page.dart';
 
+import 'data/dummy_data.dart';
+import 'screens/cinema_detail_page.dart';
 import 'screens/registration.dart';
 import 'screens/login_page.dart';
 import 'screens/homepage.dart';
@@ -9,6 +11,7 @@ import 'theme/app_colors.dart';
 import 'theme/app_typography.dart';
 
 void main() {
+  initDummyData(); // Inisialisasi data dummy sebelum menjalankan aplikasi
   runApp(const MyApp());
 }
 
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
         "/homepage": (context) => BerandaPage(),
         "/login": (context) => LoginPage(),
         "/register": (context) => RegistrationPage(),
+        "/cinema-page": (context) => CinemaDetailPage(),
       },
     );
   }
