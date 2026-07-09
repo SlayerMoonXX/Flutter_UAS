@@ -2,83 +2,23 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_typography.dart';
-
-/// =====================================================
-/// Simple data models untuk konten dummy Beranda
-/// =====================================================
-class MovieItem {
-  final String title;
-  final String genreDuration;
-  final String rating;
-  final String posterAsset;
-
-  const MovieItem({
-    required this.title,
-    required this.genreDuration,
-    required this.rating,
-    required this.posterAsset,
-  });
-}
-
-class CinemaItem {
-  final String name;
-  final String distanceInfo;
-  final List<String> tags;
-
-  const CinemaItem({
-    required this.name,
-    required this.distanceInfo,
-    required this.tags,
-  });
-}
+import '../data/dummy_data.dart';
+import 'package:flutter_uas/models/movie_model.dart';
+import 'package:flutter_uas/models/cinema_model.dart';
 
 /// =====================================================
 /// BerandaPage
 /// =====================================================
 class BerandaPage extends StatelessWidget {
-  const BerandaPage({super.key});
+  BerandaPage({super.key});
 
-  // NOTE: genre, durasi, dan rating di bawah ini masih nilai contoh —
-  // sesuaikan dengan data film asli kamu.
-  static const List<MovieItem> _nowPlaying = [
-    MovieItem(
-      title: 'Avatar: The Last Airbender',
-      genreDuration: 'Fantasy • 135m',
-      rating: '4.6',
-      posterAsset: 'assets/images/posters/avatar_the_last_airbender.jpg',
-    ),
-    MovieItem(
-      title: 'The Furious',
-      genreDuration: 'Action • 100m',
-      rating: '4.3',
-      posterAsset: 'assets/images/posters/the_furious.jpg',
-    ),
-    MovieItem(
-      title: 'Teach You a Lesson',
-      genreDuration: 'Thriller • 110m',
-      rating: '4.1',
-      posterAsset: 'assets/images/posters/teach_you_a_lesson.jpg',
-    ),
-    MovieItem(
-      title: 'Agent Kim: Reactivated',
-      genreDuration: 'Action • 115m',
-      rating: '4.4',
-      posterAsset: 'assets/images/posters/agent_kim_reactivated.jpg',
-    ),
+  final List<Movie> nowPlayingMovies = [
+    movieAvatar,
+    movieFurious,
+    movieLesson,
+    movieKim,
   ];
-
-  static const List<CinemaItem> _nearbyCinemas = [
-    CinemaItem(
-      name: 'CinePremium Grand City',
-      distanceInfo: '2.5 km • Mall Grand City Lt. 4',
-      tags: ['IMAX', 'Premiere'],
-    ),
-    CinemaItem(
-      name: 'CinePremium Town Square',
-      distanceInfo: '4.1 km • Town Square Lt. 3',
-      tags: ['Regular'],
-    ),
-  ];
+  final List<Cinema> nearbyCinemasList = [cinemaGrandCity, cinemaTownSquare];
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +38,9 @@ class BerandaPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 _HeroSection(),
                 const SizedBox(height: 40),
-                _NowPlayingSection(movies: _nowPlaying),
+                _NowPlayingSection(movies: nowPlayingMovies),
                 const SizedBox(height: 40),
-                _NearbyCinemasSection(cinemas: _nearbyCinemas),
+                _NearbyCinemasSection(cinemas: nearbyCinemasList),
                 const SizedBox(height: 24),
               ],
             ),
@@ -122,7 +62,7 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
-          color: AppColors.neutral.surface.withOpacity(0.8),
+          color: AppColors.neutral.surface.withValues(alpha: 0.8),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SafeArea(
             bottom: false,
@@ -231,8 +171,8 @@ class _HeroSection extends StatelessWidget {
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-                    Colors.black.withOpacity(0.9),
-                    Colors.black.withOpacity(0.0),
+                    Colors.black.withValues(alpha: 0.9),
+                    Colors.black.withValues(alpha: 0.0),
                   ],
                   stops: const [0.0, 0.6],
                 ),
@@ -310,7 +250,7 @@ class _Chip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.neutral.elevated.withOpacity(0.8),
+        color: AppColors.neutral.elevated.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: AppColors.glass.border),
       ),
@@ -326,7 +266,7 @@ class _Chip extends StatelessWidget {
 /// Sedang Tayang (Now Playing) Section
 /// =====================================================
 class _NowPlayingSection extends StatelessWidget {
-  final List<MovieItem> movies;
+  final List<Movie> movies;
 
   const _NowPlayingSection({required this.movies});
 
@@ -369,7 +309,7 @@ class _NowPlayingSection extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SizedBox(
-          height: 260,
+          height: 290,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,
@@ -383,95 +323,103 @@ class _NowPlayingSection extends StatelessWidget {
 }
 
 class _MovieCard extends StatelessWidget {
-  final MovieItem movie;
+  final Movie movie;
 
   const _MovieCard({required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 160,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.glass.border),
-              ),
-              child: AspectRatio(
-                aspectRatio: 2 / 3,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(
-                      movie.posterAsset,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: AppColors.neutral.elevated,
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.image_not_supported_outlined,
-                          color: AppColors.neutral.onMuted,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "/detail-page", arguments: movie);
+      },
+      child: SizedBox(
+        width: 160,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.glass.border),
+                ),
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(
+                        movie
+                            .imageUrl, // FIX: Mengubah dari posterAsset ke imageUrl
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: AppColors.neutral.elevated,
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: AppColors.neutral.onMuted,
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.6),
-                          borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: AppColors.glass.border),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.star,
-                              size: 14,
-                              color: AppColors.brand.tertiary,
-                            ),
-                            const SizedBox(width: 2),
-                            Text(
-                              movie.rating,
-                              style: AppTypography.labelSm.copyWith(
-                                color: Colors.white,
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.6),
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: AppColors.glass.border),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.star,
+                                size: 14,
+                                color: AppColors.brand.tertiary,
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 2),
+                              Text(
+                                movie.rating
+                                    .toString(), // FIX: Ditambahkan .toString() karena rating berupa double
+                                style: AppTypography.labelSm.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            movie.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTypography.bodyLg.copyWith(
-              color: Colors.white,
-              fontFamily: AppTypography.titleMd.fontFamily,
-              fontWeight: FontWeight.w600,
+            const SizedBox(height: 12),
+            Text(
+              movie.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTypography.bodyLg.copyWith(
+                color: Colors.white,
+                fontFamily: AppTypography.titleMd.fontFamily,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          Text(
-            movie.genreDuration,
-            style: AppTypography.labelSm.copyWith(
-              color: AppColors.neutral.onMuted,
+            Text(
+              // FIX: Menggabungkan list genres dan format durasi menit agar outputnya mirip ('Action • 100m')
+              '${movie.genres.join(', ')} • ${movie.durationMinutes}m',
+              style: AppTypography.labelSm.copyWith(
+                color: AppColors.neutral.onMuted,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -481,7 +429,7 @@ class _MovieCard extends StatelessWidget {
 /// Bioskop Terdekat (Nearby Cinemas) Section
 /// =====================================================
 class _NearbyCinemasSection extends StatelessWidget {
-  final List<CinemaItem> cinemas;
+  final List<Cinema> cinemas;
 
   const _NearbyCinemasSection({required this.cinemas});
 
@@ -529,7 +477,7 @@ class _NearbyCinemasSection extends StatelessWidget {
 }
 
 class _CinemaCard extends StatelessWidget {
-  final CinemaItem cinema;
+  final Cinema cinema;
 
   const _CinemaCard({required this.cinema});
 
@@ -538,7 +486,7 @@ class _CinemaCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.neutral.surface.withOpacity(0.6),
+        color: AppColors.neutral.surface.withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.glass.border),
       ),
@@ -574,7 +522,7 @@ class _CinemaCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  cinema.distanceInfo,
+                  cinema.distanceKm.toString(),
                   style: AppTypography.labelSm.copyWith(
                     color: AppColors.neutral.onMuted,
                   ),
@@ -591,13 +539,14 @@ class _CinemaCard extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         color: isImax
-                            ? AppColors.brand.secondary.withOpacity(0.2)
+                            ? AppColors.brand.secondary.withValues(alpha: 0.2)
                             : AppColors.neutral.elevated,
                         borderRadius: BorderRadius.circular(4),
                         border: isImax
                             ? Border.all(
-                                color: AppColors.brand.secondary
-                                    .withOpacity(0.3),
+                                color: AppColors.brand.secondary.withValues(
+                                  alpha: 0.3,
+                                ),
                               )
                             : null,
                       ),
@@ -637,10 +586,8 @@ class _BottomNavBar extends StatelessWidget {
         child: Container(
           height: 80,
           decoration: BoxDecoration(
-            color: AppColors.neutral.elevated.withOpacity(0.9),
-            border: Border(
-              top: BorderSide(color: AppColors.glass.highlight),
-            ),
+            color: AppColors.neutral.elevated.withValues(alpha: 0.9),
+            border: Border(top: BorderSide(color: AppColors.glass.highlight)),
           ),
           child: SafeArea(
             top: false,
@@ -675,7 +622,7 @@ class _NavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = active
         ? AppColors.brand.primary
-        : AppColors.neutral.onMuted.withOpacity(0.6);
+        : AppColors.neutral.onMuted.withValues(alpha: 0.6);
 
     return InkWell(
       onTap: () {},
@@ -687,10 +634,7 @@ class _NavBarItem extends StatelessWidget {
           children: [
             Icon(icon, color: color),
             const SizedBox(height: 4),
-            Text(
-              label,
-              style: AppTypography.labelSm.copyWith(color: color),
-            ),
+            Text(label, style: AppTypography.labelSm.copyWith(color: color)),
           ],
         ),
       ),
