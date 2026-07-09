@@ -70,7 +70,7 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 // Logo aplikasi (sesuai gambar logo yang diberikan)
                 Image.asset(
-                  'assets/images/cinepro_logo.png',
+                  'assets/png/cinepro.png',
                   height: 28,
                   color: AppColors.brand.primary,
                   errorBuilder: (context, error, stackTrace) => Icon(
@@ -80,14 +80,6 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Text(
-                  'CinePremium',
-                  style: AppTypography.titleMd.copyWith(
-                    color: AppColors.brand.primary,
-                    fontFamily: AppTypography.displayLg.fontFamily,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
                 const Spacer(),
                 // Nav desktop disembunyikan di layar sempit (mobile-first)
                 LayoutBuilder(
@@ -589,7 +581,7 @@ class _BottomNavBar extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
         child: Container(
-          height: 80,
+          padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.neutral.elevated.withValues(alpha: 0.9),
             border: Border(top: BorderSide(color: AppColors.glass.highlight)),
