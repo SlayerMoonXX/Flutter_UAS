@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uas/screens/movie_details_page.dart';
 
 import 'screens/onboarding.dart';
 import 'theme/app_colors.dart';
@@ -29,7 +30,13 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: AppTypography.textTheme,
       ),
-      home: const OnboardingPage(),
+      initialRoute: "/detail-page",
+
+      routes: {
+        "/onboard": (context) => OnboardingPage(),
+        "/detail-page": (context) => MovieDetailsPage(),
+
+      },
     );
   }
 }
