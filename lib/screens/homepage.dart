@@ -62,11 +62,7 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
-<<<<<<< HEAD
           color: AppColors.neutral.base,
-=======
-          color: AppColors.neutral.surface.withValues(alpha: 0.8),
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SafeArea(
             bottom: false,
@@ -83,33 +79,6 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                     size: 28,
                   ),
                 ),
-<<<<<<< HEAD
-=======
-                const SizedBox(width: 8),
-                const Spacer(),
-                // Nav desktop disembunyikan di layar sempit (mobile-first)
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (MediaQuery.of(context).size.width < 768) {
-                      return IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.search,
-                          color: AppColors.neutral.onMuted,
-                        ),
-                      );
-                    }
-                    return Row(
-                      children: [
-                        _NavLink(label: 'Beranda', active: true),
-                        _NavLink(label: 'Movies'),
-                        _NavLink(label: 'Cinemas'),
-                        _NavLink(label: 'Profil'),
-                      ],
-                    );
-                  },
-                ),
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
               ],
             ),
           ),
@@ -579,11 +548,7 @@ class _BottomNavBar extends StatelessWidget {
                 _NavBarItem(icon: Icons.home, label: 'Beranda', active: true, route: '/homepage'),
                 _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies', route: '/movies'),
                 _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', route: '/cinemas'),
-<<<<<<< HEAD
                 _NavBarItem(icon: Icons.person_outline, label: 'Profil', route: '/ticket-history'),
-=======
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil', route: ''),
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
               ],
             ),
           ),

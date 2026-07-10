@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uas/models/movie_model.dart';
 import 'package:flutter_uas/theme/app_colors.dart';
 import 'package:flutter_uas/theme/app_typography.dart';
-<<<<<<< HEAD
 import 'package:flutter_uas/screens/booking_page.dart';
-=======
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
 
 class MovieDetailsPage extends StatefulWidget {
   final Movie? movie;
@@ -96,20 +93,12 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                         runSpacing: 8.0,
                         children: [
                           // REVISI: Ganti string statis di bawah menggunakan data dari activeMovie jika perlu
-<<<<<<< HEAD
                           _buildTag(activeMovie.genres[0]),
-=======
-                          buildTag(activeMovie.genres[0]),
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
                           _buildTagWithIcon(
                             Icons.star,
                             activeMovie.rating.toString(),
                           ),
-<<<<<<< HEAD
                           _buildTag(
-=======
-                          buildTag(
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
                             "${activeMovie.durationMinutes.toString()} Min",
                           ),
                         ],
@@ -187,7 +176,6 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
         child: InkWell(
           onTap: selectedCinema != null && selectedTime != null
               ? () {
-<<<<<<< HEAD
                   // 1. Cari data bioskop yang sedang dipilih untuk mengambil daftar jadwalnya (availableTimes)
         final selectedCinemaData = activeMovie.availableCinemas.firstWhere(
           (showtime) => showtime.cinema.name == selectedCinema,
@@ -208,9 +196,6 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
             ),
           ),
         );
-=======
-                  print("Memesan tiket di $selectedCinema jam $selectedTime");
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
                 }
               : null,
           borderRadius: BorderRadius.circular(12),
@@ -252,11 +237,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
   }
 
   //component tag biar gak capek
-<<<<<<< HEAD
   Widget _buildTag(String text) {
-=======
-  Widget buildTag(String text) {
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -362,11 +343,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                     ),
                   ],
                 ),
-<<<<<<< HEAD
                 _buildTag(tag),
-=======
-                buildTag(tag),
->>>>>>> e9d6f569bcf030ab296b523d347e4c8200b8248a
               ],
             ),
             const SizedBox(height: 12),
