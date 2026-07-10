@@ -29,6 +29,7 @@ class _MoviesPageState extends State<MoviesPage> {
     movieFurious,
     movieLesson,
     movieKim,
+    movieChainsawMan,
     // Tambahkan dummy data lain jika ada
   ];
 
