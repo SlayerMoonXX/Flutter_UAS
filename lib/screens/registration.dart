@@ -3,44 +3,45 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_typography.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+/// CinePro - Halaman Registrasi
+/// Desain disesuaikan agar konsisten dengan LoginPage
+/// (menggunakan AppColors & AppTypography, layout serupa).
+/// Logika penting (controller, validator, toggle password, submit)
+/// TIDAK diubah.
+
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  // 1. Tambahkan FormKey untuk keperluan validasi
+class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
 
-  // 2. Tambahkan Controller untuk menangkap data input
+  final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
-  // Pastikan untuk melakukan dispose pada controller agar tidak terjadi memory leak
   @override
   void dispose() {
+    _fullNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  // 3. Buat fungsi untuk menangani proses login
-  void _handleLogin() {
-    // Mengecek apakah semua input di dalam form sudah valid
+  void _handleRegister() {
     if (_formKey.currentState!.validate()) {
-      // Jika valid, ambil datanya (Opsional: berguna jika ingin dikirim ke API)
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
-
-      // Pindah ke halaman HomePage. 
-      // Menggunakan pushReplacementNamed agar user tidak bisa kembali ke halaman login 
-      // menggunakan tombol 'back' perangkat mereka setelah berhasil login.
-      // (Pastikan kamu sudah mendefinisikan rute '/home' di main.dart)
-      Navigator.pushReplacementNamed(context, '/homepage');
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registrasi berhasil diproses!')),
+      );
     }
   }
 
@@ -51,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
-          // 4. Bungkus Column dengan Widget Form
           child: Form(
             key: _formKey,
             child: Column(
@@ -75,14 +75,24 @@ class _LoginPageState extends State<LoginPage> {
                 Center(
                   child: Column(
                     children: [
-                      Image.asset(
-                        'assets/png/cinepro.png',
-                        height: 40,
-                        fit: BoxFit.contain,
+                      // ---------- LOGO APP ----------
+                      // Logo baru (siluet putih transparan) diwarnai ulang
+                      // memakai ColorFiltered agar otomatis mengikuti
+                      // warna brand di tema (AppColors.brand.primary).
+                      ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                          AppColors.brand.primary,
+                          BlendMode.srcIn,
+                        ),
+                        child: Image.asset(
+                          'assets/png/cinepro.png',
+                          height: 40,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                       const SizedBox(height: 40),
                       Text(
-                        'Welcome Back',
+                        'Create Account',
                         style: AppTypography.headlineLg.copyWith(
                           color: AppColors.neutral.onBase,
                           fontWeight: FontWeight.w700,
@@ -90,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Welcome back! Ready to pick\nyour next movie night?',
+                        'Buat akun untuk pengalaman\nsinematik tanpa batas.',
                         textAlign: TextAlign.center,
                         style: AppTypography.bodyMd.copyWith(
                           color: AppColors.neutral.onMuted,
@@ -103,7 +113,29 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 34),
 
-                // ---------- Input Email ----------
+                // ---------- Nama Lengkap ----------
+                Text(
+                  'Nama Lengkap',
+                  style: AppTypography.bodyMd.copyWith(
+                    color: AppColors.neutral.onBase,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                _InputField(
+                  controller: _fullNameController,
+                  hintText: 'Masukkan nama lengkap',
+                  obscureText: false,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Nama lengkap wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+
+                // ---------- Email ----------
                 Text(
                   'Email',
                   style: AppTypography.bodyMd.copyWith(
@@ -116,21 +148,21 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _emailController,
                   hintText: 'Your@mail.com',
                   obscureText: false,
-                  // Tambahkan validasi email
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Email tidak boleh kosong';
+                      return 'Email wajib diisi';
                     }
                     final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
                     if (!emailRegex.hasMatch(value.trim())) {
                       return 'Format email tidak valid';
                     }
-                    return null; // Null menandakan tidak ada error
+                    return null;
                   },
                 ),
                 const SizedBox(height: 16),
 
-                // ---------- Input Password ----------
+                // ---------- Kata Sandi ----------
                 Text(
                   'Password',
                   style: AppTypography.bodyMd.copyWith(
@@ -150,38 +182,70 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                     icon: Icon(
-                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                       color: AppColors.neutral.onMuted,
                       size: 19,
                     ),
                   ),
-                  // Tambahkan validasi password
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Password tidak boleh kosong';
+                      return 'Kata sandi wajib diisi';
+                    }
+                    if (value.length < 8) {
+                      return 'Kata sandi minimal 8 karakter';
                     }
                     return null;
                   },
                 ),
+                const SizedBox(height: 16),
+
+                // ---------- Konfirmasi Kata Sandi ----------
+                Text(
+                  'Confirm Password',
+                  style: AppTypography.bodyMd.copyWith(
+                    color: AppColors.neutral.onBase,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 const SizedBox(height: 10),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'Forget Password ?',
-                    style: AppTypography.labelLg.copyWith(
-                      color: AppColors.brand.tertiary,
-                      letterSpacing: 0,
+                _InputField(
+                  controller: _confirmPasswordController,
+                  hintText: 'Ulangi password',
+                  obscureText: _obscureConfirmPassword,
+                  suffix: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                    icon: Icon(
+                      _obscureConfirmPassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: AppColors.neutral.onMuted,
+                      size: 19,
                     ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Konfirmasi kata sandi wajib diisi';
+                    }
+                    if (value != _passwordController.text) {
+                      return 'Kata sandi tidak cocok';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 28),
 
-                // ---------- Tombol Login ----------
+                // ---------- Submit Button ----------
                 SizedBox(
                   width: double.infinity,
                   height: 52,
                   child: ElevatedButton(
-                    onPressed: _handleLogin, // Sambungkan ke fungsi login
+                    onPressed: _handleRegister,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.brand.primary,
                       foregroundColor: AppColors.brand.onPrimary,
@@ -191,7 +255,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     child: Text(
-                      'LOGIN',
+                      'REGISTER',
                       style: AppTypography.labelLg.copyWith(
                         color: AppColors.brand.onPrimary,
                         fontWeight: FontWeight.w700,
@@ -201,27 +265,27 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 18),
+
+                // ---------- Login Link ----------
                 Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Dont have account yet?',
+                        'Sudah punya akun?',
                         style: AppTypography.bodyMd.copyWith(
                           color: AppColors.neutral.onMuted,
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
+                        onPressed: () => Navigator.pushNamed(context, '/login'),
                         style: TextButton.styleFrom(
                           minimumSize: Size.zero,
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(
-                          'REGISTER',
+                          'LOGIN',
                           style: AppTypography.labelLg.copyWith(
                             color: AppColors.brand.primary,
                             fontWeight: FontWeight.w700,
@@ -241,28 +305,29 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-// 5. Ubah StatelessWidget ini
 class _InputField extends StatelessWidget {
   const _InputField({
     required this.hintText,
     required this.obscureText,
+    this.controller,
     this.suffix,
-    this.controller, // Tambahan parameter
-    this.validator,  // Tambahan parameter
+    this.keyboardType,
+    this.validator,
   });
 
   final String hintText;
   final bool obscureText;
-  final Widget? suffix;
   final TextEditingController? controller;
+  final Widget? suffix;
+  final TextInputType? keyboardType;
   final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    // Ubah dari TextField menjadi TextFormField agar bisa menampung `validator`
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      keyboardType: keyboardType,
       validator: validator,
       style: AppTypography.bodyMd.copyWith(color: AppColors.neutral.onBase),
       decoration: InputDecoration(
@@ -287,7 +352,6 @@ class _InputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: AppColors.brand.primary, width: 1.2),
         ),
-        // Tambahkan Error Border agar UI terlihat rapi saat validasi gagal
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.redAccent, width: 1.2),
