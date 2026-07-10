@@ -5,7 +5,6 @@ import 'package:flutter_uas/models/ticket_model.dart';
 import 'package:flutter_uas/models/movie_model.dart';
 import 'package:flutter_uas/theme/app_colors.dart';
 import 'package:flutter_uas/theme/app_typography.dart';
-import 'package:flutter_uas/models/ticket_model.dart';
 
 /// Argumen yang dikirim dari MovieDetailsPage ke SeatBookingPage
 class SeatBookingArgs {
