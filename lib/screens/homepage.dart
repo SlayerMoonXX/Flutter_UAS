@@ -204,29 +204,6 @@ class _NowPlayingSection extends StatelessWidget {
               'Sedang Tayang',
               style: AppTypography.titleMd.copyWith(color: Colors.white),
             ),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    'Lihat Semua',
-                    style: AppTypography.labelLg.copyWith(
-                      color: AppColors.brand.secondary,
-                    ),
-                  ),
-                  Icon(
-                    Icons.chevron_right,
-                    size: 16,
-                    color: AppColors.brand.secondary,
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
         const SizedBox(height: 24),

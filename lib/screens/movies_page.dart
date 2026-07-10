@@ -14,7 +14,13 @@ class MoviesPage extends StatefulWidget {
 
 class _MoviesPageState extends State<MoviesPage> {
   // Dummy data filter
-  final List<String> categories = ['All', 'Action', 'Sci-Fi', 'Drama', 'Horror'];
+  final List<String> categories = [
+    'All',
+    'Action',
+    'Sci-Fi',
+    'Drama',
+    'Horror',
+  ];
   String selectedCategory = 'All';
 
   // Menggunakan dummy data dari data sebelumnya
@@ -41,8 +47,6 @@ class _MoviesPageState extends State<MoviesPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 16),
-                _buildSearchBar(),
                 const SizedBox(height: 24),
                 _buildComingSoonSection(),
                 const SizedBox(height: 32),
@@ -69,40 +73,22 @@ class _MoviesPageState extends State<MoviesPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: [ // Logo aplikasi (sesuai gambar logo yang diberikan)
-                Image.asset(
-                  'assets/png/cinepro.png',
-                  height: 28,
-                  color: AppColors.brand.primary,
-                  errorBuilder: (context, error, stackTrace) => Icon(
-                    Icons.movie,
+                children: [
+                  // Logo aplikasi (sesuai gambar logo yang diberikan)
+                  Image.asset(
+                    'assets/png/cinepro.png',
+                    height: 28,
                     color: AppColors.brand.primary,
-                    size: 28,
+                    errorBuilder: (context, error, stackTrace) => Icon(
+                      Icons.movie,
+                      color: AppColors.brand.primary,
+                      size: 28,
+                    ),
                   ),
-                ),
                 ],
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  /// Widget Search Bar
-  Widget _buildSearchBar() {
-    return TextField(
-      style: const TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        hintText: 'Cari film, aktor, atau sutradara...',
-        hintStyle: AppTypography.bodyMd.copyWith(color: AppColors.neutral.onMuted),
-        prefixIcon: Icon(Icons.search, color: AppColors.neutral.onMuted),
-        filled: true,
-        fillColor: AppColors.neutral.elevated,
-        contentPadding: const EdgeInsets.symmetric(vertical: 14),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
         ),
       ),
     );
@@ -127,17 +113,11 @@ class _MoviesPageState extends State<MoviesPage> {
           children: [
             Text(
               'Coming Soon',
-              style: AppTypography.titleMd.copyWith(color: Colors.white, fontSize: 22),
+              style: AppTypography.titleMd.copyWith(
+                color: Colors.white,
+                fontSize: 22,
+              ),
             ),
-            Row(
-              children: [
-                Text(
-                  'Lihat Semua',
-                  style: AppTypography.labelLg.copyWith(color: AppColors.brand.primary),
-                ),
-                Icon(Icons.arrow_forward, size: 16, color: AppColors.brand.primary),
-              ],
-            )
           ],
         ),
         const SizedBox(height: 16),
@@ -156,7 +136,8 @@ class _MoviesPageState extends State<MoviesPage> {
                 Image.asset(
                   'assets/jpg/neon_shadows.jpg', // Ganti dengan aset gambar Coming Soon Anda
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(color: AppColors.neutral.elevated),
+                  errorBuilder: (_, __, ___) =>
+                      Container(color: AppColors.neutral.elevated),
                 ),
                 // Gradient overlay
                 Container(
@@ -180,26 +161,38 @@ class _MoviesPageState extends State<MoviesPage> {
                       Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: AppColors.brand.primary,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
                               'EXCLUSIVE',
-                              style: AppTypography.labelSm.copyWith(color: Colors.white, fontSize: 8),
+                              style: AppTypography.labelSm.copyWith(
+                                color: Colors.white,
+                                fontSize: 8,
+                              ),
                             ),
                           ),
                           const SizedBox(width: 8),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.white.withValues(alpha: 0.3),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
                               'IMAX',
-                              style: AppTypography.labelSm.copyWith(color: Colors.white, fontSize: 8),
+                              style: AppTypography.labelSm.copyWith(
+                                color: Colors.white,
+                                fontSize: 8,
+                              ),
                             ),
                           ),
                         ],
@@ -207,16 +200,20 @@ class _MoviesPageState extends State<MoviesPage> {
                       const SizedBox(height: 8),
                       Text(
                         'Chronicles of Kepler',
-                        style: AppTypography.titleMd.copyWith(color: Colors.white),
+                        style: AppTypography.titleMd.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Rilis 24 Desember • Sci-Fi Thriller',
-                        style: AppTypography.labelSm.copyWith(color: AppColors.neutral.onMuted),
+                        style: AppTypography.labelSm.copyWith(
+                          color: AppColors.neutral.onMuted,
+                        ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -232,7 +229,10 @@ class _MoviesPageState extends State<MoviesPage> {
       children: [
         Text(
           'Sedang Tayang',
-          style: AppTypography.titleMd.copyWith(color: Colors.white, fontSize: 22),
+          style: AppTypography.titleMd.copyWith(
+            color: Colors.white,
+            fontSize: 22,
+          ),
         ),
         const SizedBox(height: 16),
         GridView.builder(
@@ -240,7 +240,8 @@ class _MoviesPageState extends State<MoviesPage> {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 0.55, // Disesuaikan agar muat untuk teks dan gambar
+            childAspectRatio:
+                0.55, // Disesuaikan agar muat untuk teks dan gambar
             crossAxisSpacing: 16,
             mainAxisSpacing: 24,
           ),
@@ -272,13 +273,17 @@ class _MoviesPageState extends State<MoviesPage> {
                   Image.asset(
                     movie.imageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(color: AppColors.neutral.elevated),
+                    errorBuilder: (_, __, ___) =>
+                        Container(color: AppColors.neutral.elevated),
                   ),
                   Positioned(
                     top: 8,
                     right: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(6),
@@ -286,16 +291,22 @@ class _MoviesPageState extends State<MoviesPage> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.star, size: 12, color: AppColors.brand.tertiary),
+                          Icon(
+                            Icons.star,
+                            size: 12,
+                            color: AppColors.brand.tertiary,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             movie.rating.toString(),
-                            style: AppTypography.labelSm.copyWith(color: Colors.white),
+                            style: AppTypography.labelSm.copyWith(
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -315,7 +326,9 @@ class _MoviesPageState extends State<MoviesPage> {
             '${movie.genres.join(', ')} • ${movie.durationMinutes}m',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: AppTypography.labelSm.copyWith(color: AppColors.neutral.onMuted),
+            style: AppTypography.labelSm.copyWith(
+              color: AppColors.neutral.onMuted,
+            ),
           ),
         ],
       ),
@@ -346,11 +359,31 @@ class _BottomNavBarMovies extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavBarItem(icon: Icons.home_outlined, label: 'Beranda', active: false, route: '/homepage'),
+                _NavBarItem(
+                  icon: Icons.home_outlined,
+                  label: 'Beranda',
+                  active: false,
+                  route: '/homepage',
+                ),
                 // "Movies" diset active = true
-                _NavBarItem(icon: Icons.movie_filter, label: 'Movies', active: true, route: '/movies'),
-                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', active: false, route: '/cinemas'),
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil', active: false, route: 'ticket-history'),
+                _NavBarItem(
+                  icon: Icons.movie_filter,
+                  label: 'Movies',
+                  active: true,
+                  route: '/movies',
+                ),
+                _NavBarItem(
+                  icon: Icons.theaters_outlined,
+                  label: 'Cinemas',
+                  active: false,
+                  route: '/cinemas',
+                ),
+                _NavBarItem(
+                  icon: Icons.person_outline,
+                  label: 'Profil',
+                  active: false,
+                  route: 'ticket-history',
+                ),
               ],
             ),
           ),

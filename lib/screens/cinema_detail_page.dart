@@ -49,14 +49,16 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
                         children: [
                           Icon(
                             Icons.pin_drop_outlined,
-                            size: 20,
+                            size: 24,
                             color: AppColors.brand.primarySoft,
                           ),
                           const SizedBox(width: 8),
-                          Text(
-                            cinema.address,
-                            style: AppTypography.bodyMd.copyWith(
-                              color: AppColors.brand.primarySoft,
+                          Expanded(
+                            child: Text(
+                              cinema.address,
+                              style: AppTypography.bodyMd.copyWith(
+                                color: AppColors.brand.primarySoft,
+                              ),
                             ),
                           ),
                         ],
@@ -88,13 +90,6 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "Lihat Semua",
-                    style: TextStyle(
-                      color: AppColors.brand.primarySoft,
-                      fontSize: 14,
                     ),
                   ),
                 ],

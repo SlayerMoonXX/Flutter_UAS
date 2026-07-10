@@ -27,8 +27,6 @@ class CinemasPage extends StatelessWidget {
                   'Cinemas',
                   style: AppTypography.headlineLg.copyWith(color: Colors.white),
                 ),
-                const SizedBox(height: 16),
-                _SearchBar(),
                 const SizedBox(height: 24),
                 // Daftar Bioskop (menggunakan data Cinema asli dari dummy_data.dart
                 // agar tombol "Lihat Jadwal" bisa membawa objek Cinema ke halaman detail)
@@ -46,12 +44,14 @@ class CinemasPage extends StatelessWidget {
                 ),
                 _CinemaListCard(
                   cinema: cinemaPIM,
-                  distance: '${cinemaPIM.distanceKm} km • ${cinemaPIM.cityArea}',
+                  distance:
+                      '${cinemaPIM.distanceKm} km • ${cinemaPIM.cityArea}',
                   openTime: '10:30 - 22:00',
                 ),
                 _CinemaListCard(
                   cinema: cinemaGrandCity,
-                  distance: '${cinemaGrandCity.distanceKm} km • ${cinemaGrandCity.cityArea}',
+                  distance:
+                      '${cinemaGrandCity.distanceKm} km • ${cinemaGrandCity.cityArea}',
                   openTime: '11:00 - 23:00',
                   iconSuffix: Icons.verified,
                   iconColor: AppColors.brand.secondary,
@@ -81,11 +81,8 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
             'assets/png/cinepro.png',
             height: 28,
             color: AppColors.brand.primary,
-            errorBuilder: (context, error, stackTrace) => Icon(
-              Icons.movie,
-              color: AppColors.brand.primary,
-              size: 28,
-            ),
+            errorBuilder: (context, error, stackTrace) =>
+                Icon(Icons.movie, color: AppColors.brand.primary, size: 28),
           ),
         ],
       ),
@@ -94,29 +91,6 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(56);
-}
-
-/// Kolom Pencarian
-class _SearchBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.neutral.elevated,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: TextField(
-        style: AppTypography.bodyMd.copyWith(color: Colors.white),
-        decoration: InputDecoration(
-          hintText: 'Cari bioskop...',
-          hintStyle: AppTypography.bodyMd.copyWith(color: AppColors.neutral.onMuted),
-          prefixIcon: Icon(Icons.search, color: AppColors.neutral.onMuted),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(vertical: 14),
-        ),
-      ),
-    );
-  }
 }
 
 /// Card Bioskop List
@@ -162,13 +136,15 @@ class _CinemaListCard extends StatelessWidget {
               if (iconSuffix != null) ...[
                 const SizedBox(width: 8),
                 Icon(iconSuffix, color: iconColor, size: 20),
-              ]
+              ],
             ],
           ),
           const SizedBox(height: 4),
           Text(
             distance,
-            style: AppTypography.labelSm.copyWith(color: AppColors.neutral.onMuted),
+            style: AppTypography.labelSm.copyWith(
+              color: AppColors.neutral.onMuted,
+            ),
           ),
           const SizedBox(height: 12),
           Wrap(
@@ -176,7 +152,10 @@ class _CinemaListCard extends StatelessWidget {
             runSpacing: 8,
             children: cinema.tags.map((tag) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.neutral.elevated.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
@@ -197,11 +176,17 @@ class _CinemaListCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.access_time, size: 14, color: AppColors.neutral.onMuted),
+                  Icon(
+                    Icons.access_time,
+                    size: 14,
+                    color: AppColors.neutral.onMuted,
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     'Buka: $openTime',
-                    style: AppTypography.labelSm.copyWith(color: AppColors.neutral.onMuted),
+                    style: AppTypography.labelSm.copyWith(
+                      color: AppColors.neutral.onMuted,
+                    ),
                   ),
                 ],
               ),
@@ -218,14 +203,19 @@ class _CinemaListCard extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.brand.primary,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   minimumSize: Size.zero,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 child: Text('Lihat Jadwal', style: AppTypography.labelSm),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -254,10 +244,27 @@ class _BottomNavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavBarItem(icon: Icons.home, label: 'Beranda', route: '/homepage'),
-                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies', route: '/movies'),
-                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', active: true, route: '/cinemas'),
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil', route: '/ticket-history'),
+                _NavBarItem(
+                  icon: Icons.home,
+                  label: 'Beranda',
+                  route: '/homepage',
+                ),
+                _NavBarItem(
+                  icon: Icons.movie_filter_outlined,
+                  label: 'Movies',
+                  route: '/movies',
+                ),
+                _NavBarItem(
+                  icon: Icons.theaters_outlined,
+                  label: 'Cinemas',
+                  active: true,
+                  route: '/cinemas',
+                ),
+                _NavBarItem(
+                  icon: Icons.person_outline,
+                  label: 'Profil',
+                  route: '/ticket-history',
+                ),
               ],
             ),
           ),
