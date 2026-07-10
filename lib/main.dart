@@ -3,6 +3,7 @@ import 'package:flutter_uas/data/dummy_data.dart';
 import 'package:flutter_uas/screens/cinema_detail_page.dart';
 import 'package:flutter_uas/screens/movie_details_page.dart';
 
+import 'screens/registration.dart';
 import 'screens/login_page.dart';
 import 'screens/homepage.dart';
 import 'screens/onboarding.dart';

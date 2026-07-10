@@ -473,6 +473,86 @@ final movieJohnWick = Movie(
   ],
 );
 
+// final cinemaGrandCity = Cinema(
+//   id: 'c1',
+//   name: 'CinePremium Grand City',
+//   address: 'Mall Grand City Lt. 4',
+//   distanceKm: 2.5,
+//   cityArea: 'Surabaya Pusat', // Sesuaikan area kota jika perlu
+//   tags: ['IMAX', 'PREMIERE'],
+//   facilities: ['Parkir Luas', 'Food Court', 'Toilet Bersih'],
+//   currentMovies: [],
+// );
+
+// final cinemaTownSquare = Cinema(
+//   id: 'c2',
+//   name: 'CinePremium Town Square',
+//   address: 'Town Square Lt. 3',
+//   distanceKm: 4.1,
+//   cityArea: 'Surabaya Selatan',
+//   tags: ['REGULAR'],
+//   facilities: ['Parkir Luas', 'Toilet Bersih'],
+//   currentMovies: [],
+// );
+
+// // 2. DAFTARKAN FILM DARI TEMENMU (Ubah ke Class Movie kita)
+// final movieAvatar = Movie(
+//   id: 'm1',
+//   title: 'Avatar: The Last Airbender',
+//   imageUrl: 'assets/png/avatar.png', // Ikut path temenmu
+//   genres: ['Fantasy'],
+//   rating: 4.6,
+//   durationMinutes: 135,
+//   director: 'Albert Kim', 
+//   description: 'A young boy known as the Avatar must master the four elemental powers to save a world at war.',
+//   availableCinemas: [
+//     CinemaShowtime(cinema: cinemaGrandCity, classType: 'IMAX', schedules: ['12:30', '15:15', '18:00', '20:45']),
+//     CinemaShowtime(cinema: cinemaTownSquare, classType: 'REGULAR', schedules: ['13:00', '16:30', '19:15']),
+//   ],
+// );
+
+// final movieFurious = Movie(
+//   id: 'm2',
+//   title: 'The Furious',
+//   imageUrl: 'assets/png/furious.png',
+//   genres: ['Action'],
+//   rating: 4.3,
+//   durationMinutes: 100,
+//   director: 'Unknown Director',
+//   description: 'An adrenaline-fueled ride through the underground racing circuit.',
+//   availableCinemas: [
+//     CinemaShowtime(cinema: cinemaGrandCity, classType: 'PREMIERE', schedules: ['14:00', '18:00']),
+//   ],
+// );
+
+// final movieLesson = Movie(
+//   id: 'm3',
+//   title: 'Teach You a Lesson',
+//   imageUrl: 'assets/png/lesson.png',
+//   genres: ['Thriller'],
+//   rating: 4.1,
+//   durationMinutes: 110,
+//   director: 'Unknown Director',
+//   description: 'A suspenseful game of cat and mouse where secrets can be deadly.',
+//   availableCinemas: [
+//     CinemaShowtime(cinema: cinemaTownSquare, classType: 'REGULAR', schedules: ['11:00', '15:30', '20:00']),
+//   ],
+// );
+
+// final movieKim = Movie(
+//   id: 'm4',
+//   title: 'Agent Kim: Reactivated',
+//   imageUrl: 'assets/png/mrkim.png',
+//   genres: ['Action'],
+//   rating: 4.4,
+//   durationMinutes: 115,
+//   director: 'Unknown Director',
+//   description: 'The top secret agent is pulled out of retirement for one final, dangerous assignment.',
+//   availableCinemas: [
+//     CinemaShowtime(cinema: cinemaGrandCity, classType: 'IMAX', schedules: ['13:10', '16:20', '19:30']),
+//   ],
+// );
+
 // ==========================================
 // 3. INJECT FILM KEMBALI KE LIST BIOSKOP
 // ==========================================

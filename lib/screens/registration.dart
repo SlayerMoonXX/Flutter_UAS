@@ -278,7 +278,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => Navigator.pushNamed(context, '/login'),
                         style: TextButton.styleFrom(
                           minimumSize: Size.zero,
                           padding: const EdgeInsets.symmetric(horizontal: 6),

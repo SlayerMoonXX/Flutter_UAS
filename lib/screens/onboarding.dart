@@ -144,11 +144,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         elevation: 0,
                       ),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (_) => const LoginPage(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/login');
                       },
                       child: Text(
                         'LOGIN',
@@ -161,7 +157,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                   const SizedBox(height: 14),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
                     child: Text(
                       'REGISTER',
                       style: AppTypography.labelLg.copyWith(
