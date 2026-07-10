@@ -73,7 +73,7 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
             // --- SECTION: FASILITAS CINEMA ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: buildFacilitiesCard(),
+              child: buildFacilitiesCard(cinema),
             ),
             const SizedBox(height: 24),
 
@@ -249,15 +249,24 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
     );
   }
 
-  Widget buildFacilitiesCard() {
-    final List<Map<String, dynamic>> facilities = [
-      {"icon": Icons.local_parking, "text": "Parkir Luas"},
-      {"icon": Icons.restaurant, "text": "Food Court"},
-      {"icon": Icons.accessible, "text": "Akses Kursi Roda"},
-      {"icon": Icons.wc, "text": "Toilet Bersih"},
-      {"icon": Icons.local_cafe, "text": "Cafe & Lounge"},
-      {"icon": Icons.confirmation_number, "text": "Self Ticketing"},
-    ];
+  Widget buildFacilitiesCard(Cinema cinema) {
+    // 1. Helper map untuk mencocokkan teks dari cinema.facilities dengan IconData
+    final Map<String, IconData> facilityIcons = {
+      "Parkir Luas": Icons.local_parking,
+      "Food Court": Icons.restaurant,
+      "Akses Kursi Roda": Icons.accessible,
+      "Toilet Bersih": Icons.wc,
+      "Cafe & Lounge": Icons.local_cafe,
+      "Self Ticketing": Icons.confirmation_number,
+    };
+
+    // 2. Ambil data list langsung dari objek cinema
+    // Jika null atau kosong, kita fallback ke list kosong agar tidak error
+    final List<String> displayFacilities = cinema.facilities;
+    if (displayFacilities.isEmpty) return const SizedBox.shrink();
+
+    // Opsional: Jika cinema tidak punya fasilitas, sembunyikan card atau tampilkan teks kosong
+    if (displayFacilities.isEmpty) return const SizedBox.shrink();
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -289,19 +298,20 @@ class _CinemaDetailState extends State<CinemaDetailPage> {
               crossAxisSpacing: 16,
               childAspectRatio: 3.5,
             ),
-            itemCount: facilities.length,
+            itemCount: displayFacilities.length,
             itemBuilder: (context, index) {
+              final facilityName = displayFacilities[index];
+              // Ambil icon dari map helper, jika tidak terdaftar pakai icon default (misal: Icons.check_circle_outline)
+              final iconData =
+                  facilityIcons[facilityName] ?? Icons.check_circle_outline;
+
               return Row(
                 children: [
-                  Icon(
-                    facilities[index]["icon"],
-                    color: const Color(0xFF90CAF9),
-                    size: 24,
-                  ),
+                  Icon(iconData, color: const Color(0xFF90CAF9), size: 24),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      facilities[index]["text"],
+                      facilityName,
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 14,
