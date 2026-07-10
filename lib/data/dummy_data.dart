@@ -116,7 +116,7 @@ final movieChainsawMan = Movie(
 final movieStarlight = Movie(
   id: 'm2',
   title: 'Starlight Odyssey: Beyond the Horizon',
-  imageUrl: 'assets/jpg/starlight_odyssey.jpg',
+  imageUrl: 'assets/jpg/starlight.jpg',
   genres: ['Sci-Fi', 'Adventure'],
   rating: 4.8,
   durationMinutes: 142,

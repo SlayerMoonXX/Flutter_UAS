@@ -90,6 +90,7 @@ class _TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(64);
 }
+
 /// =====================================================
 /// Hero Section (poster utama)
 /// =====================================================
@@ -106,10 +107,7 @@ class _HeroSection extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://lh3.googleusercontent.com/aida-public/AB6AXuDiO9Lzx1do32SNhXEWREJH0UkWY50S6_f7uchqyrpY74fqMCjRQ_FnsDXJHzz5MCQ2ELZeJoVMwz_4GvMYX9P-XYLzOUMhn_vhsn3Pd_9ZimjvB5Vh12OtD_waC77KaagIHvojOe_pj-hC79xoZXGinXYg4J8wrUmAqWV7frlot4KhjqOhbJQtK2FJbaKl9DF4KC0GL1JyPN8DsTQ95YOoYsCleavAdzlBRxRUQ3slJNC0qi1somjoqw',
-              fit: BoxFit.cover,
-            ),
+            Image.asset('assets/jpg/starlight.jpg', fit: BoxFit.cover),
             // Gradient overlay agar teks tetap terbaca
             Container(
               decoration: BoxDecoration(
@@ -154,28 +152,6 @@ class _HeroSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.brand.primary,
-                      foregroundColor: AppColors.brand.onPrimary,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 14,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: Text(
-                      'Beli Tiket',
-                      style: AppTypography.bodyLg.copyWith(
-                        color: AppColors.brand.onPrimary,
-                        fontFamily: AppTypography.titleMd.fontFamily,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -545,10 +521,27 @@ class _BottomNavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _NavBarItem(icon: Icons.home, label: 'Beranda', active: true, route: '/homepage'),
-                _NavBarItem(icon: Icons.movie_filter_outlined, label: 'Movies', route: '/movies'),
-                _NavBarItem(icon: Icons.theaters_outlined, label: 'Cinemas', route: '/cinemas'),
-                _NavBarItem(icon: Icons.person_outline, label: 'Profil', route: '/ticket-history'),
+                _NavBarItem(
+                  icon: Icons.home,
+                  label: 'Beranda',
+                  active: true,
+                  route: '/homepage',
+                ),
+                _NavBarItem(
+                  icon: Icons.movie_filter_outlined,
+                  label: 'Movies',
+                  route: '/movies',
+                ),
+                _NavBarItem(
+                  icon: Icons.theaters_outlined,
+                  label: 'Cinemas',
+                  route: '/cinemas',
+                ),
+                _NavBarItem(
+                  icon: Icons.person_outline,
+                  label: 'Profil',
+                  route: '/ticket-history',
+                ),
               ],
             ),
           ),
